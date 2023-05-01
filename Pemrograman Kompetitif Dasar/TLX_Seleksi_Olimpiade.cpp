@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+
+//defines
+#define int long long
+#define debug(x) cerr << "(" << #x << "=" << x << "," << __LINE__ << ")\n";
+#define sz(x) (int)(x).size()
+#define all(x) begin(x), end(x)
+#define rep(i,a,b) for(int i=a;i<(b);i++)
+
+//constants
+const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1}; 
+const char dir[4]{'D','R','U','L'};
+const int mod=1e9+7;
+const int maxn=2e5+5;
+const double eps=1e-9;
+
+//typedefs
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+
+//Template
+template<class T> using oset=tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+
+//Mods
+int mul(int a,int b,int MOD)
+{
+    return ((a%MOD)*(b%MOD))%MOD;
+}
+int add(int a,int b,int MOD)
+{
+    return (a+b)%MOD;
+}
+int sub(int a,int b,int MOD)
+{
+    return (MOD+a-b)%MOD;
+}
+
+struct info
+{
+    int a,b,c;
+};
+void solve()
+{
+    int n,k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    vector<pair<string,info>> p(n);
+    for(int i=0;i<n;i++)
+    {
+        cin >> p[i].first >> p[i].second.a >> p[i].second.b >> p[i].second.c;
+    }
+    sort(p.begin(),p.end(),[](pair<string,info> x,pair<string,info> y){
+        if(x.second.c!=y.second.c)
+        {
+            return x.second.c>y.second.c;
+        }
+        else if(x.second.b!=y.second.b)
+        {
+            return x.second.b>y.second.b;
+        }
+        else
+        {
+            return x.second.a>y.second.a;
+        }
+    } );
+    for(int i=0;i<n;i++)
+    {
+        if(p[i].first==s)
+        {
+            if(i<=k-1)
+            {
+                cout << "YA\n";
+            }
+            else
+            {
+                cout << "TIDAK\n";
+            }
+        }
+    }
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        solve();
+    }
+    
+    return 0;
+}
